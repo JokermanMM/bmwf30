@@ -31,13 +31,13 @@ export default function Header({ session, onOpenAuth }) {
             <div className="stripe dark-blue"></div>
             <div className="stripe red"></div>
           </div>
-          F30 PROJECT
+          От <span style={{ color: 'var(--m-red)', fontStyle: 'italic', fontWeight: '900', fontSize: '1.2em', marginLeft: '2px', marginRight: '1px' }}>M</span>аксима - для друзей
         </motion.div>
         
         <nav className="nav-links" style={{ display: 'flex', alignItems: 'center', gap: '2.5rem' }}>
-          <a href="#hero" className="nav-link">Home</a>
-          <a href="#roadmap" className="nav-link">Roadmap</a>
-          <a href="#gallery" className="nav-link">Gallery</a>
+          <a href="#hero" className="nav-link">Главная</a>
+          <a href="#roadmap" className="nav-link">Планы</a>
+          <a href="#gallery" className="nav-link">Галерея</a>
           
           <div style={{ width: '1px', height: '20px', background: 'var(--border-light)' }}></div>
           
@@ -48,12 +48,12 @@ export default function Header({ session, onOpenAuth }) {
                 {session.user.email.split('@')[0]}
               </span>
               <button onClick={handleLogout} className="text-btn" style={{ color: 'var(--m-red)', display: 'flex', alignItems: 'center', gap: '4px' }}>
-                <LogOut size={14} /> Exit
+                <LogOut size={14} /> Выход
               </button>
             </div>
           ) : (
             <button onClick={onOpenAuth} className="btn btn-primary" style={{ padding: '8px 20px', fontSize: '0.9rem' }}>
-              Sign In
+              Войти
             </button>
           )}
         </nav>

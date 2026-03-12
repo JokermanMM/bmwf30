@@ -10,7 +10,7 @@ export default function Footer() {
           </div>
         </div>
         <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem' }}>
-          © {new Date().getFullYear()} BMW F30 Project. Crafted with precision & code.
+          © {new Date().getFullYear()} Проект BMW F30. Идеальное сочетание баварской инженерии и кода.
         </p>
       </div>
     </footer>

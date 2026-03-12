@@ -34,7 +34,7 @@ export default function Auth({ isOpen, onClose }) {
           password,
         });
         if (error) throw error;
-        alert('Check your email for the login link or sign in if email confirmation is disabled.');
+        alert('Проверьте почту для подтверждения или войдите, если подтверждение отключено.');
         setIsLogin(true); // Switch to login view
       }
     } catch (err) {
@@ -60,8 +60,8 @@ export default function Auth({ isOpen, onClose }) {
             </button>
             
             <div className="auth-header">
-              <h2>{isLogin ? 'Welcome Back' : 'Join the Crew'}</h2>
-              <p>{isLogin ? 'Log in to access your garage.' : 'Create an account to track your F30 goals and upload photos.'}</p>
+              <h2>{isLogin ? 'С Возвращением' : 'Присоединяйтесь'}</h2>
+              <p>{isLogin ? 'Войдите, чтобы открыть свой гараж.' : 'Создайте аккаунт, чтобы отслеживать планы по F30 и загружать фото.'}</p>
             </div>
 
             {error && (
@@ -76,7 +76,7 @@ export default function Auth({ isOpen, onClose }) {
                 <Mail className="input-icon" size={18} />
                 <input 
                   type="email" 
-                  placeholder="Email address" 
+                  placeholder="Email адрес" 
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   required
@@ -87,7 +87,7 @@ export default function Auth({ isOpen, onClose }) {
                 <Lock className="input-icon" size={18} />
                 <input 
                   type="password" 
-                  placeholder="Password" 
+                  placeholder="Пароль" 
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   required
@@ -96,19 +96,19 @@ export default function Auth({ isOpen, onClose }) {
               </div>
 
               <button type="submit" className="btn btn-primary auth-submit" disabled={loading}>
-                {loading ? <Loader2 className="spinner" size={18} /> : (isLogin ? 'Sign In' : 'Sign Up')}
+                {loading ? <Loader2 className="spinner" size={18} /> : (isLogin ? 'Войти' : 'Зарегистрироваться')}
               </button>
             </form>
 
             <div className="auth-footer">
               <p>
-                {isLogin ? "Don't have an account? " : "Already have an account? "}
+                {isLogin ? "Нет аккаунта? " : "Уже есть аккаунт? "}
                 <button 
                   className="text-btn text-gradient" 
                   onClick={() => { setIsLogin(!isLogin); setError(null); }}
                   type="button"
                 >
-                  {isLogin ? 'Sign Up' : 'Sign In'}
+                  {isLogin ? 'Зарегистрироваться' : 'Войти'}
                 </button>
               </p>
             </div>

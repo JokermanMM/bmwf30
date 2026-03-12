@@ -36,8 +36,8 @@ export default function Gallery({ session, onOpenAuth }) {
       console.warn('Supabase missing or gallery error:', error);
       setDbError(true);
       setPhotos([
-        { id: '1', url: 'https://images.unsplash.com/photo-1555353540-64fd3b71c905?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80', alt: 'Demo BMW', user_id: 'demo' },
-        { id: '2', url: 'https://images.unsplash.com/photo-1603584173870-7f23fdae1b7a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80', alt: 'Demo BMW 2', user_id: 'demo' }
+        { id: '1', url: 'https://images.unsplash.com/photo-1555353540-64fd3b71c905?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80', alt: 'Демо BMW', user_id: 'demo' },
+        { id: '2', url: 'https://images.unsplash.com/photo-1603584173870-7f23fdae1b7a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80', alt: 'Демо BMW 2', user_id: 'demo' }
       ]);
     } finally {
       setLoading(false);
@@ -81,7 +81,7 @@ export default function Gallery({ session, onOpenAuth }) {
       fetchPhotos(); // Re-fetch to see new photo randomly placed
     } catch (error) {
       console.error('Error uploading photo:', error);
-      alert('Error uploading photo. Check console or make sure bucket is public.');
+      alert('Ошибка при загрузке фото. Проверьте консоль или убедитесь, что корзина (bucket) публичная.');
     } finally {
       setUploading(false);
       // Reset input
@@ -92,7 +92,7 @@ export default function Gallery({ session, onOpenAuth }) {
   const handleDelete = async (photo) => {
     if (!session || photo.user_id !== session.user.id) return;
     
-    if (!window.confirm("Are you sure you want to delete this photo?")) return;
+    if (!window.confirm("Вы уверены, что хотите удалить это фото?")) return;
 
     setDeletingId(photo.id);
     
@@ -122,7 +122,7 @@ export default function Gallery({ session, onOpenAuth }) {
       setSelectedImg(null); // Close lightbox
     } catch (error) {
       console.error('Error deleting photo:', error);
-      alert('Error deleting photo.');
+      alert('Ошибка при удалении фото.');
     } finally {
       setDeletingId(null);
     }
@@ -133,8 +133,8 @@ export default function Gallery({ session, onOpenAuth }) {
       <div className="container">
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: '3rem' }}>
           <div>
-            <h2 className="section-title text-gradient" style={{ marginBottom: '1rem' }}>Global Gallery</h2>
-            <p className="section-subtitle" style={{ marginBottom: 0 }}>Discover rides from the community. Mixed up fresh every time.</p>
+            <h2 className="section-title text-gradient" style={{ marginBottom: '1rem' }}>Общая Галерея</h2>
+            <p className="section-subtitle" style={{ marginBottom: 0 }}>Смотрите машины сообщества. Перемешиваются при каждом обновлении.</p>
           </div>
           
           <div>
@@ -154,7 +154,7 @@ export default function Gallery({ session, onOpenAuth }) {
                   style={{ display: 'flex', alignItems: 'center', gap: '8px' }}
                 >
                   {uploading ? <Loader2 className="spinner" size={18} /> : <Upload size={18} />}
-                  {uploading ? 'Uploading...' : 'Upload Photo'}
+                  {uploading ? 'Загрузка...' : 'Загрузить Фото'}
                 </button>
               </>
             ) : (
@@ -163,7 +163,7 @@ export default function Gallery({ session, onOpenAuth }) {
                   onClick={onOpenAuth}
                   style={{ display: 'flex', alignItems: 'center', gap: '8px' }}
                 >
-                  <Upload size={18} /> Login to Upload
+                  <Upload size={18} /> Войти для загрузки
                 </button>
             )}
           </div>
@@ -182,7 +182,7 @@ export default function Gallery({ session, onOpenAuth }) {
         {loading ? (
           <div style={{ textAlign: 'center', padding: '4rem 0', color: 'var(--text-muted)' }}>
             <Loader2 className="spinner" size={32} style={{ margin: '0 auto 1rem auto' }} />
-            <p>Loading community garage...</p>
+            <p>Загрузка гаража сообщества...</p>
           </div>
         ) : (
           <div className="gallery-grid">
@@ -198,7 +198,7 @@ export default function Gallery({ session, onOpenAuth }) {
               >
                 <img src={photo.url} alt={photo.alt || 'Car photo'} loading="lazy" />
                 <div className="gallery-overlay">
-                  <span>View</span>
+                  <span>Смотреть</span>
                 </div>
               </motion.div>
             ))}
@@ -226,14 +226,14 @@ export default function Gallery({ session, onOpenAuth }) {
                     {deletingId === selectedImg.id ? <Loader2 className="spinner" size={20} /> : <Trash2 size={20} />}
                   </button>
                 )}
-                <button className="icon-btn" onClick={() => setSelectedImg(null)} title="Close">
+                <button className="icon-btn" onClick={() => setSelectedImg(null)} title="Закрыть">
                   <X size={24} />
                 </button>
               </div>
               
               <motion.img 
                 src={selectedImg.url} 
-                alt="Community car"
+                alt="Машина сообщества"
                 initial={{ scale: 0.9 }}
                 animate={{ scale: 1 }}
                 exit={{ scale: 0.9 }}

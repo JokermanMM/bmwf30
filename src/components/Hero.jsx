@@ -18,7 +18,7 @@ export default function Hero() {
             transition={{ duration: 0.8 }}
             className="hero-badge glass"
           >
-            <Terminal size={14} /> System Online // F30.v1.0
+            <Terminal size={14} /> Система Онлайн // F30.v1.0
           </motion.div>
           
           <motion.h1 
@@ -27,8 +27,8 @@ export default function Hero() {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="hero-title"
           >
-            THE ULTIMATE <br />
-            <span className="text-gradient">DRIVING MACHINE</span>
+            ИДЕАЛЬНАЯ <br />
+            <span className="text-gradient">МАШИНА ДЛЯ ВОЖДЕНИЯ</span>
           </motion.h1>
           
           <motion.p 
@@ -37,7 +37,7 @@ export default function Hero() {
             transition={{ duration: 0.8, delay: 0.4 }}
             className="hero-subtitle"
           >
-            BMW F30 PROJECT · BAVARIAN ENGINEERING MEETS CODE
+            ПРОЕКТ BMW F30 · БАВАРСКАЯ ИНЖЕНЕРИЯ И КОД
           </motion.p>
           
           <motion.div 
@@ -46,8 +46,8 @@ export default function Hero() {
             transition={{ duration: 0.8, delay: 0.6 }}
             className="hero-btn-group"
           >
-            <a href="#roadmap" className="btn btn-primary">View Roadmap</a>
-            <a href="#gallery" className="btn btn-secondary">Gallery</a>
+            <a href="#roadmap" className="btn btn-primary">Смотреть Планы</a>
+            <a href="#gallery" className="btn btn-secondary">Галерея</a>
           </motion.div>
         </div>
       </div>

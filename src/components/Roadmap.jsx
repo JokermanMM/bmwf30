@@ -40,11 +40,10 @@ export default function Roadmap({ session, onOpenAuth }) {
     } catch (error) {
       console.warn('Supabase error:', error.message);
       setDbError(true);
-      // Fallback local data if DB not connected
       if (!session) {
         setGoals([
-          { id: '1', title: 'Start modifying the F30', completed: true, completed_at: new Date().toISOString(), position: 0 },
-          { id: '2', title: 'Login to add your own goals', completed: false, completed_at: null, position: 1 }
+          { id: '1', title: 'Начать тюнинг F30', completed: true, completed_at: new Date().toISOString(), position: 0 },
+          { id: '2', title: 'Войдите, чтобы добавить свои цели', completed: false, completed_at: null, position: 1 }
         ]);
       } else {
         setGoals([]);
@@ -141,7 +140,7 @@ export default function Roadmap({ session, onOpenAuth }) {
       <div className="container">
         <h2 className="section-title text-gradient">Roadmap</h2>
         <p className="section-subtitle">
-          {session ? "Планы, мечты и техническое обслуживание на этот год. (Можно перетаскивать!)" : "Sign in to track your personal F30 project goals."}
+          {session ? "Планы, мечты и техническое обслуживание на этот год. (Можно перетаскивать!)" : "Войдите, чтобы отслеживать свои планы по проекту F30."}
         </p>
 
         {dbError && (
@@ -220,7 +219,7 @@ export default function Roadmap({ session, onOpenAuth }) {
           ) : (
             <div style={{ textAlign: 'center', padding: '1rem', borderTop: '1px solid var(--border-light)' }}>
               <button onClick={onOpenAuth} className="btn btn-secondary" style={{ display: 'inline-flex', gap: '8px' }}>
-                <Lock size={16} /> Login to manage your Roadmap
+                <Lock size={16} /> Войти, чтобы управлять планами
               </button>
             </div>
           )}

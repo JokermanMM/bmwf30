@@ -10,8 +10,8 @@ export default function Footer() {
           </div>
           <span style={{ fontSize: '1.2rem', cursor: 'help' }} title="Скоро: Секретный раздел для рыбаков 🎣">🎣</span>
         </div>
-        <p style={{ color: 'var(--text-secondary)', fontSize: '0.95rem', fontWeight: '500' }}>
-          © {new Date().getFullYear()} Проект BMW F30. Баварская инженерия, летнее небо и код.
+        <p style={{ color: 'var(--text-primary)', fontSize: '0.95rem', fontWeight: '600' }}>
+          © {new Date().getFullYear()} Проект BMW F30. Баварская инженерия, чистое небо и яркое лето.
         </p>
       </div>
     </footer>

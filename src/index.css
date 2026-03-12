@@ -4,22 +4,21 @@
   --m-blue-dark: #002b5e;  /* Navy */
   --m-red: #e10600;        /* M Red */
   
-  /* Summer Sunset Palette */
-  --sunset-orange: #f59e0b; /* Amber/Orange */
-  --sunset-glow: #fbbf24;   /* Warm Yellow */
-  --summer-grass: #16a34a;  /* Rich Green */
-  --sky-lavender: #6366f1;  /* Soft Sky Blue/Purple */
+  /* Vibrant Summer Palette */
+  --summer-sky: #0ea5e9;    /* Clear Sky Blue */
+  --summer-grass: #10b981;  /* Vibrant Emerald/Grass */
+  --summer-sun: #facc15;    /* Bright Sun Yellow */
   
-  /* Theme Colors - Golden Hour */
-  --bg-primary: #fffef2;    /* Warm Cream */
-  --bg-secondary: #fef3c7;  /* Soft Sunset Amber */
+  /* Theme Colors - Fresh Summer */
+  --bg-primary: #f8fafc;    /* Clean White-ish */
+  --bg-secondary: #f0f9ff;  /* Soft Sky Blue */
   --bg-tertiary: #ffffff;   /* Pure White */
-  --text-primary: #1e1b4b;  /* Deep Navy/Ink */
-  --text-secondary: #451a03; /* Deep Warm Brown */
-  --text-muted: #92400e;    /* Brown-Muted */
-  --accent: #d97706;        /* Golden Amber */
-  --border-light: rgba(69, 26, 3, 0.08); 
-  --border-glow: rgba(245, 158, 11, 0.2);
+  --text-primary: #0f172a;  /* Very Dark Slate (Ink) */
+  --text-secondary: #334155; /* Darker Slate Gray */
+  --text-muted: #64748b;    /* Medium Gray */
+  --accent: var(--m-blue-light);
+  --border-light: rgba(15, 23, 42, 0.08); 
+  --border-glow: rgba(0, 130, 214, 0.2);
   
   /* UI Elements */
   --radius-sm: 8px;

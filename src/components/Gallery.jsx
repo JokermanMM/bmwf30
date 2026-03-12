@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, Upload, Loader2, AlertCircle } from 'lucide-react';
+import { X, Upload, Loader2, AlertCircle, Trash2 } from 'lucide-react';
 import { supabase } from '../lib/supabase';
 import './Gallery.css';
 
@@ -9,12 +9,13 @@ export default function Gallery({ session, onOpenAuth }) {
   const [photos, setPhotos] = useState([]);
   const [loading, setLoading] = useState(true);
   const [uploading, setUploading] = useState(false);
+  const [deletingId, setDeletingId] = useState(null);
   const [dbError, setDbError] = useState(false);
   const fileInputRef = useRef(null);
 
   useEffect(() => {
     fetchPhotos();
-  }, []);
+  }, [session]);
 
   const fetchPhotos = async () => {
     try {
@@ -35,8 +36,8 @@ export default function Gallery({ session, onOpenAuth }) {
       console.warn('Supabase missing or gallery error:', error);
       setDbError(true);
       setPhotos([
-        { id: '1', url: 'https://images.unsplash.com/photo-1555353540-64fd3b71c905?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80', alt: 'Demo BMW' },
-        { id: '2', url: 'https://images.unsplash.com/photo-1603584173870-7f23fdae1b7a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80', alt: 'Demo BMW 2' }
+        { id: '1', url: 'https://images.unsplash.com/photo-1555353540-64fd3b71c905?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80', alt: 'Demo BMW', user_id: 'demo' },
+        { id: '2', url: 'https://images.unsplash.com/photo-1603584173870-7f23fdae1b7a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80', alt: 'Demo BMW 2', user_id: 'demo' }
       ]);
     } finally {
       setLoading(false);
@@ -85,6 +86,45 @@ export default function Gallery({ session, onOpenAuth }) {
       setUploading(false);
       // Reset input
       if (fileInputRef.current) fileInputRef.current.value = '';
+    }
+  };
+
+  const handleDelete = async (photo) => {
+    if (!session || photo.user_id !== session.user.id) return;
+    
+    if (!window.confirm("Are you sure you want to delete this photo?")) return;
+
+    setDeletingId(photo.id);
+    
+    try {
+      // 1. Delete from database
+      const { error: dbError } = await supabase
+        .from('gallery')
+        .delete()
+        .eq('id', photo.id)
+        .eq('user_id', session.user.id);
+
+      if (dbError) throw dbError;
+
+      // 2. We could delete from storage here, but we need the filename from the URL.
+      // Easiest is to extract it:
+      const urlParts = photo.url.split('/');
+      const fileName = urlParts[urlParts.length - 1];
+      
+      const { error: storageError } = await supabase.storage
+        .from('car-images')
+        .remove([fileName]);
+        
+      if (storageError) console.error("Storage delete error:", storageError);
+
+      // 3. Update UI
+      setPhotos(photos.filter(p => p.id !== photo.id));
+      setSelectedImg(null); // Close lightbox
+    } catch (error) {
+      console.error('Error deleting photo:', error);
+      alert('Error deleting photo.');
+    } finally {
+      setDeletingId(null);
     }
   };
 
@@ -175,9 +215,22 @@ export default function Gallery({ session, onOpenAuth }) {
               exit={{ opacity: 0 }}
               onClick={() => setSelectedImg(null)}
             >
-              <button className="close-btn" onClick={() => setSelectedImg(null)}>
-                <X size={24} />
-              </button>
+              <div className="lightbox-actions" onClick={(e) => e.stopPropagation()}>
+                {session && session.user.id === selectedImg.user_id && (
+                  <button 
+                    className="icon-btn delete-btn" 
+                    onClick={() => handleDelete(selectedImg)}
+                    disabled={deletingId === selectedImg.id}
+                    title="Delete your photo"
+                  >
+                    {deletingId === selectedImg.id ? <Loader2 className="spinner" size={20} /> : <Trash2 size={20} />}
+                  </button>
+                )}
+                <button className="icon-btn" onClick={() => setSelectedImg(null)} title="Close">
+                  <X size={24} />
+                </button>
+              </div>
+              
               <motion.img 
                 src={selectedImg.url} 
                 alt="Community car"

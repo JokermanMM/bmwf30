@@ -47,6 +47,9 @@ To enable multi-user accounts and the global gallery:
 
    drop policy if exists "Auth Upload" on storage.objects;
    create policy "Auth Upload" on storage.objects for insert with check ( bucket_id = 'car-images' and auth.role() = 'authenticated' );
+
+   drop policy if exists "Auth Delete" on storage.objects;
+   create policy "Auth Delete" on storage.objects for delete using ( bucket_id = 'car-images' and auth.role() = 'authenticated' );
    ```
 
 5. Go to **Project Settings -> API** to get your `URL` and `anon public` key.

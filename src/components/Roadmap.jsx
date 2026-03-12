@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
-import { Plus, Check, Clock, AlertCircle, Lock } from 'lucide-react';
+import { motion, Reorder } from 'framer-motion';
+import { Plus, Check, Clock, AlertCircle, Lock, GripVertical } from 'lucide-react';
 import { supabase } from '../lib/supabase';
 import './Roadmap.css';
 
@@ -21,14 +21,15 @@ export default function Roadmap({ session, onOpenAuth }) {
         throw new Error("Supabase credentials missing");
       }
       
-      let query = supabase.from('goals').select('*').order('id', { ascending: true });
+      let query = supabase.from('goals')
+        .select('*')
+        .order('position', { ascending: true })
+        .order('created_at', { ascending: true });
       
       // If logged in, only fetch their goals
       if (session) {
         query = query.eq('user_id', session.user.id);
       } else {
-        // If not logged in, we might either show nothing or global goals. Let's just show global goals (all public ones if any exist for guest view)
-        // Let's limit it so it doesn't crash if thousands exist
         query = query.limit(10);
       }
 
@@ -42,8 +43,8 @@ export default function Roadmap({ session, onOpenAuth }) {
       // Fallback local data if DB not connected
       if (!session) {
         setGoals([
-          { id: '1', title: 'Start modifying the F30', completed: true, completed_at: new Date().toISOString() },
-          { id: '2', title: 'Login to add your own goals', completed: false, completed_at: null }
+          { id: '1', title: 'Start modifying the F30', completed: true, completed_at: new Date().toISOString(), position: 0 },
+          { id: '2', title: 'Login to add your own goals', completed: false, completed_at: null, position: 1 }
         ]);
       } else {
         setGoals([]);
@@ -57,10 +58,12 @@ export default function Roadmap({ session, onOpenAuth }) {
     e.preventDefault();
     if (!newGoal.trim() || !session) return;
 
+    const newPosition = goals.length;
     const goalData = {
       title: newGoal,
       completed: false,
-      user_id: session.user.id
+      user_id: session.user.id,
+      position: newPosition
     };
 
     const tempId = Date.now().toString();
@@ -105,6 +108,26 @@ export default function Roadmap({ session, onOpenAuth }) {
     }
   };
 
+  const handleReorder = async (newOrder) => {
+    if (!session) return;
+    setGoals(newOrder); // Optimistic UI update
+
+    try {
+      if (dbError) return;
+      // Fire individual updates to save the new order indices
+      const updatePromises = newOrder.map((goal, index) => {
+        return supabase
+          .from('goals')
+          .update({ position: index })
+          .eq('id', goal.id)
+          .eq('user_id', session.user.id);
+      });
+      await Promise.all(updatePromises);
+    } catch (error) {
+      console.error('Error saving new order', error);
+    }
+  };
+
   const formatDate = (dateString) => {
     if (!dateString) return '';
     const date = new Date(dateString);
@@ -118,7 +141,7 @@ export default function Roadmap({ session, onOpenAuth }) {
       <div className="container">
         <h2 className="section-title text-gradient">Roadmap</h2>
         <p className="section-subtitle">
-          {session ? "Планы, мечты и техническое обслуживание на этот год." : "Sign in to track your personal F30 project goals."}
+          {session ? "Планы, мечты и техническое обслуживание на этот год. (Можно перетаскивать!)" : "Sign in to track your personal F30 project goals."}
         </p>
 
         {dbError && (
@@ -132,17 +155,27 @@ export default function Roadmap({ session, onOpenAuth }) {
         )}
 
         <div className="roadmap-container glass">
-          <ul className="goals-list">
-            {goals.map((goal, index) => {
+          <Reorder.Group 
+            axis="y" 
+            values={goals} 
+            onReorder={handleReorder} 
+            className="goals-list"
+          >
+            {goals.map((goal) => {
               const takesAction = session && session.user.id === goal.user_id;
               return (
-                <motion.li 
-                  key={goal.id} 
+                <Reorder.Item 
+                  key={goal.id}
+                  value={goal}
                   className={`goal-item ${goal.completed ? 'completed' : ''}`}
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: index * 0.1 }}
+                  dragListener={takesAction} // Only allow dragging if it's the user's item
                 >
+                  {takesAction && (
+                    <div className="drag-handle" title="Drag to reorder">
+                      <GripVertical size={18} />
+                    </div>
+                  )}
+
                   <button 
                     className="goal-checkbox"
                     onClick={() => toggleGoal(goal.id, goal.completed, goal.user_id)}
@@ -160,7 +193,7 @@ export default function Roadmap({ session, onOpenAuth }) {
                       </span>
                     )}
                   </div>
-                </motion.li>
+                </Reorder.Item>
               );
             })}
             
@@ -169,7 +202,7 @@ export default function Roadmap({ session, onOpenAuth }) {
                 Пока нет целей. Начните планировать!
               </p>
             )}
-          </ul>
+          </Reorder.Group>
 
           {session ? (
             <form onSubmit={addGoal} className="add-goal-form">

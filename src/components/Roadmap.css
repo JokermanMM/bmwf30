@@ -12,6 +12,7 @@
 .goals-list {
   list-style: none;
   margin-bottom: 2rem;
+  padding: 0;
 }
 
 .goal-item {
@@ -20,11 +21,31 @@
   gap: 1rem;
   padding: 1rem;
   border-bottom: 1px solid var(--border-light);
-  transition: all 0.3s ease;
+  transition: background-color 0.3s ease;
+  background: transparent;
 }
 
 .goal-item:last-child {
   border-bottom: none;
+}
+
+.drag-handle {
+  color: var(--text-muted);
+  cursor: grab;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.5;
+  transition: opacity 0.2s, color 0.2s;
+}
+
+.drag-handle:hover {
+  opacity: 1;
+  color: var(--text-primary);
+}
+
+.drag-handle:active {
+  cursor: grabbing;
 }
 
 .goal-checkbox {

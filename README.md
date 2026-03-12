@@ -25,6 +25,7 @@ To enable multi-user accounts and the global gallery:
      completed boolean default false,
      completed_at timestamp with time zone,
      user_id uuid references auth.users not null,
+     position integer default 0,
      created_at timestamp with time zone default now()
    );
 
@@ -35,6 +36,17 @@ To enable multi-user accounts and the global gallery:
      user_id uuid references auth.users not null,
      created_at timestamp with time zone default now()
    );
+
+   -- STORAGE FIX: Run this to instantly fix the upload permissions!
+   insert into storage.buckets (id, name, public) 
+   values ('car-images', 'car-images', true)
+   on conflict (id) do update set public = true;
+
+   drop policy if exists "Public Access" on storage.objects;
+   create policy "Public Access" on storage.objects for select using ( bucket_id = 'car-images' );
+
+   drop policy if exists "Auth Upload" on storage.objects;
+   create policy "Auth Upload" on storage.objects for insert with check ( bucket_id = 'car-images' and auth.role() = 'authenticated' );
    ```
 
 5. Go to **Project Settings -> API** to get your `URL` and `anon public` key.

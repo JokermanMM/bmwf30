@@ -16,38 +16,35 @@ export default function Roadmap({ session, onOpenAuth }) {
 
   const fetchGoals = async () => {
     setLoading(true);
+    
+    // If not logged in, show demo data only
+    if (!session) {
+      setGoals([
+        { id: 'd1', title: 'Установить М-зеркала', completed: true, completed_at: new Date().toISOString(), position: 0 },
+        { id: 'd2', title: 'Сделать детейлинг', completed: false, completed_at: null, position: 1 },
+        { id: 'd3', title: 'Новый выхлоп', completed: false, completed_at: null, position: 2 }
+      ]);
+      setLoading(false);
+      return;
+    }
+
     try {
       if (import.meta.env.VITE_SUPABASE_URL === 'placeholder_url' || !import.meta.env.VITE_SUPABASE_URL) {
         throw new Error("Supabase credentials missing");
       }
       
-      let query = supabase.from('goals')
+      const { data, error } = await supabase.from('goals')
         .select('*')
+        .eq('user_id', session.user.id)
         .order('position', { ascending: true })
         .order('created_at', { ascending: true });
-      
-      // If logged in, only fetch their goals
-      if (session) {
-        query = query.eq('user_id', session.user.id);
-      } else {
-        query = query.limit(10);
-      }
-
-      const { data, error } = await query;
         
       if (error) throw error;
       setGoals(data || []);
     } catch (error) {
       console.warn('Supabase error:', error.message);
       setDbError(true);
-      if (!session) {
-        setGoals([
-          { id: '1', title: 'Начать тюнинг F30', completed: true, completed_at: new Date().toISOString(), position: 0 },
-          { id: '2', title: 'Войдите, чтобы добавить свои цели', completed: false, completed_at: null, position: 1 }
-        ]);
-      } else {
-        setGoals([]);
-      }
+      setGoals([]);
     } finally {
       setLoading(false);
     }

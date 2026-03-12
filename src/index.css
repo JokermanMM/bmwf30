@@ -4,16 +4,16 @@
   --m-blue-dark: #002b5e;  /* Navy */
   --m-red: #e10600;        /* M Red */
   
-  /* Theme Colors */
-  --bg-primary: #050505;
-  --bg-secondary: #0f0f11;
-  --bg-tertiary: #1a1a1c;
-  --text-primary: #f8fafc;
-  --text-secondary: #94a3b8;
-  --text-muted: #64748b;
+  /* Theme Colors - Light Summer */
+  --bg-primary: #f8fafc;   /* Soft White */
+  --bg-secondary: #f1f5f9; /* Light Gray/Sky */
+  --bg-tertiary: #ffffff;  /* Pure White */
+  --text-primary: #1e293b; /* Slate Dark */
+  --text-secondary: #475569;
+  --text-muted: #94a3b8;
   --accent: var(--m-blue-light);
-  --border-light: rgba(255, 255, 255, 0.08); /* 8% opacity white */
-  --border-glow: rgba(0, 130, 214, 0.3);
+  --border-light: rgba(0, 43, 94, 0.08); /* 8% opacity navy */
+  --border-glow: rgba(0, 130, 214, 0.2);
   
   /* UI Elements */
   --radius-sm: 8px;
@@ -68,7 +68,7 @@ button {
 }
 
 .text-gradient {
-  background: linear-gradient(135deg, #fff 0%, #94a3b8 100%);
+  background: linear-gradient(135deg, var(--text-primary) 0%, var(--m-blue-dark) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;

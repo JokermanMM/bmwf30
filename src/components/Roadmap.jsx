@@ -22,7 +22,8 @@ export default function Roadmap({ session, onOpenAuth }) {
       setGoals([
         { id: 'd1', title: 'Установить М-зеркала', completed: true, completed_at: new Date().toISOString(), position: 0 },
         { id: 'd2', title: 'Сделать детейлинг', completed: false, completed_at: null, position: 1 },
-        { id: 'd3', title: 'Новый выхлоп', completed: false, completed_at: null, position: 2 }
+        { id: 'd3', title: 'Новый выхлоп', completed: false, completed_at: null, position: 2 },
+        { id: 'f1', title: '🎣 Найти новое место для рыбалки', completed: false, completed_at: null, position: 3 }
       ]);
       setLoading(false);
       return;

@@ -4,7 +4,7 @@
   left: 0;
   width: 100vw;
   height: 100vh;
-  background: rgba(0, 0, 0, 0.7);
+  background: rgba(0, 43, 94, 0.3);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
   z-index: 1000;
@@ -20,7 +20,8 @@
   padding: 2.5rem 2rem;
   border-radius: var(--radius-lg);
   position: relative;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+  background: white;
+  box-shadow: 0 20px 60px rgba(0, 43, 94, 0.15);
 }
 
 .auth-close {
@@ -29,7 +30,7 @@
   right: 1rem;
   width: 32px;
   height: 32px;
-  background: rgba(255, 255, 255, 0.05);
+  background: var(--bg-secondary);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -38,7 +39,7 @@
 }
 
 .auth-close:hover {
-  background: rgba(255, 255, 255, 0.1);
+  background: var(--border-light);
   color: var(--text-primary);
 }
 
@@ -91,7 +92,7 @@
 
 .input-group input {
   width: 100%;
-  background: rgba(0, 0, 0, 0.3);
+  background: var(--bg-secondary);
   border: 1px solid var(--border-light);
   color: var(--text-primary);
   padding: 14px 16px 14px 44px;
@@ -103,8 +104,8 @@
 
 .input-group input:focus {
   border-color: var(--accent);
-  background: rgba(0, 0, 0, 0.5);
-  box-shadow: 0 0 0 2px rgba(0, 130, 214, 0.2);
+  background: white;
+  box-shadow: 0 0 0 2px rgba(0, 130, 214, 0.1);
 }
 
 .auth-submit {

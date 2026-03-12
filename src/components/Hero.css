@@ -21,7 +21,7 @@
   position: absolute;
   border-radius: 50%;
   filter: blur(100px);
-  opacity: 0.4;
+  opacity: 0.15;
   animation: float 10s infinite alternate ease-in-out;
 }
 
@@ -30,7 +30,7 @@
   height: 400px;
   background: var(--m-blue-light);
   top: 10%;
-  left: 10%;
+  left: -5%;
 }
 
 .glow-orb.red {
@@ -38,7 +38,7 @@
   height: 300px;
   background: var(--m-red);
   bottom: 20%;
-  right: 10%;
+  right: -5%;
   animation-delay: -5s;
 }
 
@@ -54,6 +54,7 @@
   align-items: center;
   text-align: center;
   width: 100%;
+  z-index: 1;
 }
 
 .hero-badge {
@@ -113,7 +114,7 @@
 }
 
 .btn-secondary {
-  background: rgba(255, 255, 255, 0.05);
+  background: rgba(0, 43, 94, 0.05);
   border: 1px solid var(--border-light);
   color: var(--text-primary);
 }

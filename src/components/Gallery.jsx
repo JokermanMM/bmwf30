@@ -129,7 +129,7 @@ export default function Gallery({ session, onOpenAuth }) {
   };
 
   // Ticker Logic
-  const [baseVelocity, setBaseVelocity] = useState(1);
+  const [baseVelocity, setBaseVelocity] = useState(0.4);
   const x = useRef(0);
   const trackRef = useRef(null);
   const containerRef = useRef(null);
@@ -182,7 +182,6 @@ export default function Gallery({ session, onOpenAuth }) {
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: '3rem' }}>
           <div>
             <h2 className="section-title text-gradient" style={{ marginBottom: '1rem' }}>Общая Галерея</h2>
-            <p className="section-subtitle" style={{ marginBottom: 0 }}>Крути барабан курсором: влево ⟵ ⟶ вправо.</p>
           </div>
           
           <div>

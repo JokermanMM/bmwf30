@@ -140,7 +140,7 @@ export default function Roadmap({ session, onOpenAuth }) {
       <div className="container">
         <h2 className="section-title text-gradient">Roadmap</h2>
         <p className="section-subtitle">
-          {session ? "Планы, мечты и техническое обслуживание на этот год. (Можно перетаскивать!)" : "Войдите, чтобы отслеживать свои планы по проекту F30."}
+          {session ? "Планы, мечты и техническое обслуживание на этот год." : "Войдите, чтобы отслеживать свои планы по проекту F30."}
         </p>
 
         {dbError && (

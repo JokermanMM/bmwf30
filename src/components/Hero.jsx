@@ -12,23 +12,14 @@ export default function Hero() {
       
       <div className="container hero-container">
         <div className="hero-content">
-          <motion.div 
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="hero-badge glass"
-          >
-            <Terminal size={14} /> Система Онлайн // F30.v1.0
-          </motion.div>
-          
           <motion.h1 
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
             className="hero-title"
           >
-            ИДЕАЛЬНАЯ <br />
-            <span className="text-gradient">МАШИНА ДЛЯ ВОЖДЕНИЯ</span>
+            КЛУБНЫЙ ГАРАЖ <br />
+            <span className="text-gradient">ДЛЯ ДРУЗЕЙ И ФАНАТОВ</span>
           </motion.h1>
           
           <motion.p 
@@ -46,7 +37,7 @@ export default function Hero() {
             transition={{ duration: 0.8, delay: 0.6 }}
             className="hero-btn-group"
           >
-            <a href="#roadmap" className="btn btn-primary">Смотреть Планы</a>
+            <a href="#roadmap" className="btn btn-primary">Мои планы</a>
             <a href="#gallery" className="btn btn-secondary">Галерея</a>
           </motion.div>
         </div>

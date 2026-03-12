@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, Mail, Lock, AlertCircle, Loader2 } from 'lucide-react';
+import { X, Mail, Lock, AlertCircle, Loader2, User } from 'lucide-react';
 import { supabase } from '../lib/supabase';
 import './Auth.css';
 
@@ -8,6 +8,7 @@ export default function Auth({ isOpen, onClose }) {
   const [isLogin, setIsLogin] = useState(true);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [nickname, setNickname] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
@@ -32,6 +33,11 @@ export default function Auth({ isOpen, onClose }) {
         const { error } = await supabase.auth.signUp({
           email,
           password,
+          options: {
+            data: {
+              nickname: nickname
+            }
+          }
         });
         if (error) throw error;
         alert('Проверьте почту для подтверждения или войдите, если подтверждение отключено.');
@@ -72,6 +78,19 @@ export default function Auth({ isOpen, onClose }) {
             )}
 
             <form onSubmit={handleSubmit} className="auth-form">
+              {!isLogin && (
+                <div className="input-group">
+                  <User className="input-icon" size={18} />
+                  <input 
+                    type="text" 
+                    placeholder="Ваш никнейм" 
+                    value={nickname}
+                    onChange={(e) => setNickname(e.target.value)}
+                    required
+                  />
+                </div>
+              )}
+              
               <div className="input-group">
                 <Mail className="input-icon" size={18} />
                 <input 

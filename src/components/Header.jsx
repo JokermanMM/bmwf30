@@ -26,12 +26,13 @@ export default function Header({ session, onOpenAuth }) {
           animate={{ opacity: 1, x: 0 }}
           className="logo"
         >
-          <div className="m-stripes">
+          От
+          <div className="m-stripes" style={{ margin: '0 2px 0 6px', height: '18px' }}>
             <div className="stripe light-blue"></div>
             <div className="stripe dark-blue"></div>
             <div className="stripe red"></div>
           </div>
-          От <span style={{ color: 'var(--m-red)', fontStyle: 'italic', fontWeight: '900', fontSize: '1.2em', marginLeft: '2px', marginRight: '1px' }}>M</span>аксима - для друзей
+          аксима - для друзей
         </motion.div>
         
         <nav className="nav-links" style={{ display: 'flex', alignItems: 'center', gap: '2.5rem' }}>
@@ -45,7 +46,7 @@ export default function Header({ session, onOpenAuth }) {
             <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
               <span style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', display: 'flex', alignItems: 'center', gap: '6px' }}>
                 <User size={14} />
-                {session.user.email.split('@')[0]}
+                {session.user.user_metadata?.nickname || session.user.email.split('@')[0]}
               </span>
               <button onClick={handleLogout} className="text-btn" style={{ color: 'var(--m-red)', display: 'flex', alignItems: 'center', gap: '4px' }}>
                 <LogOut size={14} /> Выход

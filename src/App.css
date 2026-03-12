@@ -40,7 +40,6 @@
   letter-spacing: -0.05em;
   display: flex;
   align-items: center;
-  gap: 1rem;
 }
 
 .nav-links {
@@ -58,7 +57,8 @@
   letter-spacing: 0.05em;
 }
 
-.nav-link:hover, .nav-link.active {
+.nav-link:hover,
+.nav-link.active {
   color: var(--text-primary);
 }
 
@@ -73,12 +73,14 @@
   transition: width 0.3s ease;
 }
 
-.nav-link:hover::after, .nav-link.active::after {
+.nav-link:hover::after,
+.nav-link.active::after {
   width: 100%;
 }
 
 @media (max-width: 768px) {
   .nav-links {
-    display: none; /* simple mobile nav for now */
+    display: none;
+    /* simple mobile nav for now */
   }
 }

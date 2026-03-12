@@ -30,9 +30,9 @@ function App() {
 
   // Easter egg: console logs
   useEffect(() => {
-    console.log("%c🚗 BMW F30 System Initialized", "color: #0082d6; font-size: 20px; font-weight: bold;");
-    console.log("%cV-MAX logic unlocked. Ready to drive.", "color: #1e293b; font-size: 12px;");
-    console.log("%c🎣 Fishing mode: STANDBY. Bait detected.", "color: #22c55e; font-size: 12px; font-style: italic;");
+    console.log("%c🌅 BMW F30 Golden Hour Initialized", "color: #f59e0b; font-size: 20px; font-weight: bold;");
+    console.log("%cV-MAX logic unlocked. Driving into the sunset.", "color: #451a03; font-size: 12px;");
+    console.log("%c🎣 Fishing mode: STANDBY. Bait detected in golden waters.", "color: #16a34a; font-size: 12px; font-style: italic;");
   }, []);
 
   return (

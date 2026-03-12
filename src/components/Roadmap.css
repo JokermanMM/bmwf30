@@ -7,9 +7,10 @@
   margin: 0 auto;
   border-radius: var(--radius-lg);
   padding: 2.5rem;
-  background: white;
+  background: rgba(255, 255, 255, 0.9);
   border: 1px solid var(--border-light);
-  box-shadow: 0 10px 40px rgba(0, 43, 94, 0.05);
+  box-shadow: 0 10px 40px rgba(69, 26, 3, 0.05);
+  backdrop-filter: blur(8px);
 }
 
 .goals-list {

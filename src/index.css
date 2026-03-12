@@ -4,20 +4,22 @@
   --m-blue-dark: #002b5e;  /* Navy */
   --m-red: #e10600;        /* M Red */
   
-  /* Summer Colors */
-  --summer-sky: #0ea5e9;   /* Sky Blue */
-  --summer-grass: #22c55e; /* Grass Green */
+  /* Summer Sunset Palette */
+  --sunset-orange: #f59e0b; /* Amber/Orange */
+  --sunset-glow: #fbbf24;   /* Warm Yellow */
+  --summer-grass: #16a34a;  /* Rich Green */
+  --sky-lavender: #6366f1;  /* Soft Sky Blue/Purple */
   
-  /* Theme Colors - Light Summer */
-  --bg-primary: #f0f9ff;   /* Very Light Sky Blue */
-  --bg-secondary: #f0fdf4; /* Very Light Mint/Grass */
-  --bg-tertiary: #ffffff;  /* Pure White */
-  --text-primary: #0f172a; /* Slate Dark */
-  --text-secondary: #334155;
-  --text-muted: #64748b;
-  --accent: var(--m-blue-light);
-  --border-light: rgba(0, 43, 94, 0.1); 
-  --border-glow: rgba(0, 130, 214, 0.2);
+  /* Theme Colors - Golden Hour */
+  --bg-primary: #fffef2;    /* Warm Cream */
+  --bg-secondary: #fef3c7;  /* Soft Sunset Amber */
+  --bg-tertiary: #ffffff;   /* Pure White */
+  --text-primary: #1e1b4b;  /* Deep Navy/Ink */
+  --text-secondary: #451a03; /* Deep Warm Brown */
+  --text-muted: #92400e;    /* Brown-Muted */
+  --accent: #d97706;        /* Golden Amber */
+  --border-light: rgba(69, 26, 3, 0.08); 
+  --border-glow: rgba(245, 158, 11, 0.2);
   
   /* UI Elements */
   --radius-sm: 8px;
@@ -72,7 +74,7 @@ button {
 }
 
 .text-gradient {
-  background: linear-gradient(135deg, var(--text-primary) 0%, var(--m-blue-dark) 100%);
+  background: linear-gradient(135deg, var(--text-primary) 0%, var(--accent) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;

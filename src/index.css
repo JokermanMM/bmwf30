@@ -1,0 +1,116 @@
+:root {
+  /* M-Sport Colors */
+  --m-blue-light: #0082d6; /* Bavarian Blue */
+  --m-blue-dark: #002b5e;  /* Navy */
+  --m-red: #e10600;        /* M Red */
+  
+  /* Theme Colors */
+  --bg-primary: #050505;
+  --bg-secondary: #0f0f11;
+  --bg-tertiary: #1a1a1c;
+  --text-primary: #f8fafc;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
+  --accent: var(--m-blue-light);
+  --border-light: rgba(255, 255, 255, 0.08); /* 8% opacity white */
+  --border-glow: rgba(0, 130, 214, 0.3);
+  
+  /* UI Elements */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 24px;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Outfit', 'Inter', sans-serif;
+  letter-spacing: -0.02em;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  color: inherit;
+}
+
+/* Utilities */
+.glass {
+  background: rgba(15, 15, 17, 0.6);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--border-light);
+}
+
+.text-gradient {
+  background: linear-gradient(135deg, #fff 0%, #94a3b8 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* M-Sport Stripes */
+.m-stripes {
+  display: flex;
+  height: 14px;
+  gap: 3px;
+  transform: skew(-20deg);
+}
+
+.stripe {
+  width: 8px;
+  height: 100%;
+}
+.stripe.light-blue { background-color: var(--m-blue-light); }
+.stripe.dark-blue { background-color: var(--m-blue-dark); }
+.stripe.red { background-color: var(--m-red); }
+
+/* Common Layout */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.section {
+  padding: 6rem 0;
+  position: relative;
+}
+
+.section-title {
+  font-size: 2.5rem;
+  font-weight: 800;
+  margin-bottom: 1rem;
+}
+
+.section-subtitle {
+  font-size: 1.1rem;
+  color: var(--text-secondary);
+  margin-bottom: 3rem;
+  max-width: 600px;
+}

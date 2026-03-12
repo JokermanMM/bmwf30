@@ -1,0 +1,171 @@
+.bg-secondary {
+  background-color: var(--bg-secondary);
+}
+
+.roadmap-container {
+  max-width: 800px;
+  margin: 0 auto;
+  border-radius: var(--radius-lg);
+  padding: 2.5rem;
+}
+
+.goals-list {
+  list-style: none;
+  margin-bottom: 2rem;
+}
+
+.goal-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  border-bottom: 1px solid var(--border-light);
+  transition: all 0.3s ease;
+}
+
+.goal-item:last-child {
+  border-bottom: none;
+}
+
+.goal-checkbox {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 2px solid var(--border-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--bg-primary);
+  background: transparent;
+  transition: all 0.3s;
+  flex-shrink: 0;
+}
+
+.goal-item.completed .goal-checkbox {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+}
+
+.goal-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex: 1;
+}
+
+.goal-title {
+  font-size: 1.1rem;
+  transition: all 0.3s;
+}
+
+.goal-item.completed .goal-title {
+  color: var(--text-muted);
+  text-decoration: line-through;
+}
+
+.goal-date {
+  color: var(--text-muted);
+  cursor: help;
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+/* Tooltip implementation */
+.tooltip::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  top: -30px;
+  right: 0;
+  background: var(--m-blue-dark);
+  color: white;
+  padding: 4px 12px;
+  border-radius: 4px;
+  font-size: 0.85rem;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s, transform 0.2s;
+  transform: translateY(5px);
+  z-index: 10;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+}
+
+.tooltip:hover::after {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.add-goal-form {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.goal-input {
+  flex: 1;
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid var(--border-light);
+  color: var(--text-primary);
+  padding: 12px 20px;
+  border-radius: var(--radius-md);
+  font-size: 1rem;
+  font-family: inherit;
+  transition: border-color 0.3s;
+}
+
+.goal-input:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+.add-btn {
+  background: var(--accent);
+  color: white;
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s;
+}
+
+.add-btn:hover:not(:disabled) {
+  background: #0093f5;
+  transform: translateY(-2px);
+}
+
+.add-btn:disabled {
+  background: var(--text-muted);
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.db-alert {
+  max-width: 800px;
+  margin: 0 auto 2rem auto;
+  padding: 1rem 1.5rem;
+  background: rgba(225, 6, 0, 0.1);
+  border: 1px solid rgba(225, 6, 0, 0.3);
+  border-radius: var(--radius-md);
+  color: #ffb4b3;
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  font-size: 0.95rem;
+}
+
+.db-alert p {
+  margin-top: 0.25rem;
+  opacity: 0.8;
+  font-size: 0.85rem;
+}
+
+@media (max-width: 768px) {
+  .roadmap-container {
+    padding: 1.5rem;
+  }
+}

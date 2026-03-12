@@ -11,19 +11,33 @@ A beautiful, interactive portfolio and roadmap for the BMW F30 project. Built wi
 ## Setup Instructions
 
 ### 1. Database Setup (Supabase)
-To make your goals save permanently across all devices:
-1. Go to [Supabase](https://supabase.com) and create a free account/project.
-2. Go to the **SQL Editor** in your Supabase dashboard and run this command:
+To enable multi-user accounts and the global gallery:
+1. Go to [Supabase](https://supabase.com) and create a free project.
+2. In **Authentication -> Providers**, ensure Email is enabled. Turn OFF "Confirm email" if you just want instant logins for you and friends.
+3. In **Storage**, create a new bucket named exactly `car-images` and set it to **Public**.
+4. Go to the **SQL Editor** and run this command exactly as written:
+
    ```sql
+   -- Create goals table with user ID
    create table goals (
      id uuid default gen_random_uuid() primary key,
      title text not null,
      completed boolean default false,
      completed_at timestamp with time zone,
+     user_id uuid references auth.users not null,
+     created_at timestamp with time zone default now()
+   );
+
+   -- Create gallery table
+   create table gallery (
+     id uuid default gen_random_uuid() primary key,
+     url text not null,
+     user_id uuid references auth.users not null,
      created_at timestamp with time zone default now()
    );
    ```
-3. Go to **Project Settings -> API** to get your `URL` and `anon public` key.
+
+5. Go to **Project Settings -> API** to get your `URL` and `anon public` key.
 
 ### 2. Push to GitHub
 If you haven't initialized Git yet:

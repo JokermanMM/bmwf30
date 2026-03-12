@@ -128,13 +128,61 @@ export default function Gallery({ session, onOpenAuth }) {
     }
   };
 
+  // Ticker Logic
+  const [baseVelocity, setBaseVelocity] = useState(1);
+  const x = useRef(0);
+  const trackRef = useRef(null);
+  const containerRef = useRef(null);
+
+  const handleMouseMove = (e) => {
+    if (!containerRef.current) return;
+    const rect = containerRef.current.getBoundingClientRect();
+    const centerX = rect.left + rect.width / 2;
+    const mouseX = e.clientX;
+    
+    // Normalize distance from center: -1 to 1
+    const normalized = (mouseX - centerX) / (rect.width / 2);
+    // Speed: max 8px per frame, min -8px
+    setBaseVelocity(normalized * 8);
+  };
+
+  const handleMouseLeave = () => {
+    setBaseVelocity(1); // Resume slow default crawl
+  };
+
+  useEffect(() => {
+    let animationFrame;
+    const animate = () => {
+      if (trackRef.current && photos.length > 0) {
+        x.current -= baseVelocity;
+        
+        // Loop logic: assuming photos are fixed width + gap
+        // Each item is 400px + 1.5rem (24px) gap = 424px
+        const itemWidth = 424; 
+        const totalWidth = photos.length * itemWidth;
+        
+        if (x.current <= -totalWidth) {
+          x.current += totalWidth;
+        } else if (x.current > 0) {
+          x.current -= totalWidth;
+        }
+        
+        trackRef.current.style.transform = `translateX(${x.current}px)`;
+      }
+      animationFrame = requestAnimationFrame(animate);
+    };
+    
+    animationFrame = requestAnimationFrame(animate);
+    return () => cancelAnimationFrame(animationFrame);
+  }, [photos, baseVelocity]);
+
   return (
-    <section id="gallery" className="section">
+    <section id="gallery" className="section" style={{ overflowX: 'hidden' }}>
       <div className="container">
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: '3rem' }}>
           <div>
             <h2 className="section-title text-gradient" style={{ marginBottom: '1rem' }}>Общая Галерея</h2>
-            <p className="section-subtitle" style={{ marginBottom: 0 }}>Смотрите машины сообщества. Перемешиваются при каждом обновлении.</p>
+            <p className="section-subtitle" style={{ marginBottom: 0 }}>Крути барабан курсором: влево ⟵ ⟶ вправо.</p>
           </div>
           
           <div>
@@ -185,23 +233,27 @@ export default function Gallery({ session, onOpenAuth }) {
             <p>Загрузка гаража сообщества...</p>
           </div>
         ) : (
-          <div className="gallery-grid">
-            {photos.map((photo, index) => (
-              <motion.div 
-                key={photo.id || index}
-                className="gallery-item"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: (index % 5) * 0.1 }}
-                onClick={() => setSelectedImg(photo)}
-              >
-                <img src={photo.url} alt={photo.alt || 'Car photo'} loading="lazy" />
-                <div className="gallery-overlay">
-                  <span>Смотреть</span>
-                </div>
-              </motion.div>
-            ))}
+          <div 
+            className="gallery-ticker-container" 
+            ref={containerRef}
+            onMouseMove={handleMouseMove}
+            onMouseLeave={handleMouseLeave}
+          >
+            <div className="gallery-ticker-track" ref={trackRef}>
+              {/* Render photos twice for infinite loop */}
+              {[...photos, ...photos, ...photos].map((photo, index) => (
+                <motion.div 
+                  key={`${photo.id || index}-${index}`}
+                  className="gallery-item"
+                  onClick={() => setSelectedImg(photo)}
+                >
+                  <img src={photo.url} alt={photo.alt || 'Car photo'} loading="lazy" />
+                  <div className="gallery-overlay">
+                    <span>Смотреть</span>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
           </div>
         )}
 

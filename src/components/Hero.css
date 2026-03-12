@@ -26,18 +26,18 @@
 }
 
 .glow-orb.blue {
-  width: 400px;
-  height: 400px;
-  background: var(--m-blue-light);
-  top: 10%;
+  width: 500px;
+  height: 500px;
+  background: var(--summer-sky);
+  top: -10%;
   left: -5%;
 }
 
-.glow-orb.red {
-  width: 300px;
-  height: 300px;
-  background: var(--m-red);
-  bottom: 20%;
+.glow-orb.green {
+  width: 400px;
+  height: 400px;
+  background: var(--summer-grass);
+  bottom: 0%;
   right: -5%;
   animation-delay: -5s;
 }

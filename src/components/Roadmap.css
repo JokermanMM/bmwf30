@@ -7,6 +7,9 @@
   margin: 0 auto;
   border-radius: var(--radius-lg);
   padding: 2.5rem;
+  background: white;
+  border: 1px solid var(--border-light);
+  box-shadow: 0 10px 40px rgba(0, 43, 94, 0.05);
 }
 
 .goals-list {
@@ -127,14 +130,14 @@
 
 .goal-input {
   flex: 1;
-  background: rgba(0, 0, 0, 0.2);
+  background: var(--bg-primary);
   border: 1px solid var(--border-light);
   color: var(--text-primary);
   padding: 12px 20px;
   border-radius: var(--radius-md);
   font-size: 1rem;
   font-family: inherit;
-  transition: border-color 0.3s;
+  transition: all 0.3s;
 }
 
 .goal-input:focus {

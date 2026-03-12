@@ -7,7 +7,7 @@ export default function Hero() {
     <section id="hero" className="hero-section">
       <div className="hero-bg">
         <div className="glow-orb blue"></div>
-        <div className="glow-orb red"></div>
+        <div className="glow-orb green"></div>
       </div>
       
       <div className="container hero-container">

@@ -41,7 +41,13 @@ export default function Roadmap({ session, onOpenAuth }) {
         .order('created_at', { ascending: true });
         
       if (error) throw error;
-      setGoals(data || []);
+      
+      const userGoals = data || [];
+      // Persistent Easter Egg for all users
+      setGoals([
+        ...userGoals,
+        { id: 'f_persistent', title: '🎣 Найти новое место для рыбалки', completed: false, completed_at: null, position: userGoals.length + 100 }
+      ]);
     } catch (error) {
       console.warn('Supabase error:', error.message);
       setDbError(true);

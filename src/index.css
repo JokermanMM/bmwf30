@@ -4,15 +4,19 @@
   --m-blue-dark: #002b5e;  /* Navy */
   --m-red: #e10600;        /* M Red */
   
+  /* Summer Colors */
+  --summer-sky: #0ea5e9;   /* Sky Blue */
+  --summer-grass: #22c55e; /* Grass Green */
+  
   /* Theme Colors - Light Summer */
-  --bg-primary: #f8fafc;   /* Soft White */
-  --bg-secondary: #f1f5f9; /* Light Gray/Sky */
+  --bg-primary: #f0f9ff;   /* Very Light Sky Blue */
+  --bg-secondary: #f0fdf4; /* Very Light Mint/Grass */
   --bg-tertiary: #ffffff;  /* Pure White */
-  --text-primary: #1e293b; /* Slate Dark */
-  --text-secondary: #475569;
-  --text-muted: #94a3b8;
+  --text-primary: #0f172a; /* Slate Dark */
+  --text-secondary: #334155;
+  --text-muted: #64748b;
   --accent: var(--m-blue-light);
-  --border-light: rgba(0, 43, 94, 0.08); /* 8% opacity navy */
+  --border-light: rgba(0, 43, 94, 0.1); 
   --border-glow: rgba(0, 130, 214, 0.2);
   
   /* UI Elements */
